@@ -41,7 +41,7 @@ function displayProducts() {
             <p>Type: ${product.type}</p>
             <p>Description: ${product.desc}</p>
             <p>Price: ${product.price}</p>
-            <p>Image URL: ${product.image}</p>
+            <img src="${product.image}">
             <button id="remove_product" onclick="removeProduct('${product.type}')">Remove</button>
             <hr>
         `;
