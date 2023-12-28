@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div id="navbar">
+      <!--Create Show Products button here, give id as "show_products". avoid making spelling mistakes in HTML id's-->
+    </div>
+    
+    <button id="show_products" onclick="showProducts()">Show Products</button>
+
+    <div>
+      <h2>Add Products</h2>
+      <!--Create a form here to accept product data from user, give form HTML id as "products"
+      and four inputs to accept Type, Description, price, & image-->
+      <form id="Products">
+        <label for="type">Type:</label>
+        <input type="text" id="type" required>
+
+        <label for="desc">Description:</label>
+        <input type="text" id="desc" required>
+
+        <label for="price">Price:</label>
+      <input type="number" id="price" required>
+
+        <label for="image">Image URL:</label>
+        <input type="text" id="image" required>
+        
+      <!--create a "Add Product" button to submit form, give it html id as "add_product"-->
+      <button type="button" id="add_product" onclick="addProduct()">Add Product</button>
+
+      </form>
+    </div>
+  </body>
+</html>
+
+<script>
+    //to add more products//
+function addProduct() {
+    const type = document.getElementById('type').value;
+    const desc = document.getElementById('desc').value;
+    const price = document.getElementById('price').value;
+    const image = document.getElementById('image').value;
+
+    const product = { type, desc, price, image };
+
+    const existingProducts = JSON.parse(localStorage.getItem('products')) || [];
+    existingProducts.push(product);
+
+    localStorage.setItem('products', JSON.stringify(existingProducts));
+
+    document.getElementById('products').reset();
+}
+//to show product and redirect to inventory page//
+function showProducts() {
+    window.location.href = 'inventory.html';
+}
+
+
+
+</script>
+

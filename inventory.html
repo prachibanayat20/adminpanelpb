@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <style></style>
+
+  <body>
+    <div id="navbar">
+      <!--Create Add More Product button here, give id as "add_more_product". avoid making spelling mistakes in HTML id's-->
+      <button id="add_more_product" onclick="addMoreProduct()">Add More Product</button>
+
+    </div>
+    <div id="all_products">
+
+      <!-- The Remove Product button will have id as "remove_product" -->
+      <button id="remove_all_products" onclick="removeAllProducts()">Remove All </button>
+    </div>
+  </body>
+</html>
+
+<script>
+    //display functions//
+function displayProducts() {
+    const allProductsDiv = document.getElementById('all_products');
+    allProductsDiv.innerHTML = '';
+
+    //to clear the existing content//
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+
+    products.forEach(product => {
+        const productDiv = document.createElement('div');
+
+// Set the inner HTML of the product card
+        productDiv.innerHTML = `
+            <p>Type: ${product.type}</p>
+            <p>Description: ${product.desc}</p>
+            <p>Price: ${product.price}</p>
+            <p>Image URL: ${product.image}</p>
+            <button id="remove_product" onclick="removeProduct('${product.type}')">Remove</button>
+            <hr>
+        `;
+      // Append the product card to the container
+        allProductsDiv.appendChild(productDiv);
+    });
+}
+// Function to remove all products
+function removeAllProducts() {
+    localStorage.removeItem('products'); 
+    displayProducts(); // Update the display 
+}
+
+//to navigate to 'add more products' page//
+function addMoreProduct() {
+    window.location.href = 'index.html';
+}
+//remove a specific product//
+function removeProduct(type) {
+    const existingProducts = JSON.parse(localStorage.getItem('products')) || [];
+    const updatedProducts = existingProducts.filter(product => product.type !== type);
+    localStorage.setItem('products', JSON.stringify(updatedProducts));
+    displayProducts();
+}
+//initial display when the page loads//
+displayProducts();
+</script>
+
